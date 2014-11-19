@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Startpage</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="cycler">
+		<img class="background active" src="asset/background/Chrysanthemum.jpg" alt="Chrysanthemum">
+		<img class="background" src="asset/background/Desert.jpg" alt="Desert">
+		<img class="background" src="asset/background/Tulips.jpg" alt="Tulips">
+	</div>
+	
+	<div class="container">
+		<div class="col-sm-8 col-sm-offset-2 grp">
+			<form action="https://duckduckgo.com/" method="get">
+				<div class="input-group">
+					<input type="text" class="form-control" name="q" placeholder="Search DuckDuckGo">
+					<span class="input-group-btn">
+						<input type="submit" class="btn btn-success" value="Go">
+					</span>
+				</div>
+			</form>
+			<div class="text-center" id="menu">
+				<ul>
+					<li><a href="#">Link 1</a></li>
+					<li><a href="#">Link 2</a>
+						<ul>
+							<li><a href="#">Sub 1</a></li>
+							<li><a href="#">Sub 2</a></li>
+							<li><a href="#">Sub 3</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Link 3</a></li>
+					<li><a href="#">Link 4</a>
+						<ul>
+							<li><a href="#">Sub 4</a></li>
+							<li><a href="#">Sub 5</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script>
+		function cycleImages() {
+			var $active = $(".cycler .active");
+			var $next = ($active.next().length > 0) ? $active.next() : $(".cycler img:first");
+			$next.css("z-index", 2) /* moves next image up the pile */
+			$active.fadeOut(2000, function() {
+				$active.css("z-index", 1).show().removeClass("active");
+				$next.css("z-index", 3).addClass("active");
+			});
+		}
+		
+		$(document).ready(function() {
+			setInterval("cycleImages()", 7000);
+		})
+	</script>
+</body>
+</html>
