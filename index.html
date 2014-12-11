@@ -7,12 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<div class="cycler">
-		<img class="background active" src="asset/background/Chrysanthemum.jpg" alt="Chrysanthemum">
-		<img class="background" src="asset/background/Desert.jpg" alt="Desert">
-		<img class="background" src="asset/background/Tulips.jpg" alt="Tulips">
-	</div>
-	
+	<div class="cycler"></div>
 	<div class="container">
 		<div class="col-sm-8 col-sm-offset-2 grp">
 			<form action="https://duckduckgo.com/" method="get">
@@ -47,18 +42,33 @@
 	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script>
-		function cycleImages() {
-			var $active = $(".cycler .active");
-			var $next = ($active.next().length > 0) ? $active.next() : $(".cycler img:first");
-			$next.css("z-index", 2) /* moves next image up the pile */
-			$active.fadeOut(2000, function() {
-				$active.css("z-index", 1).show().removeClass("active");
-				$next.css("z-index", 3).addClass("active");
-			});
+		var backgrounds = ['Chrysanthemum.jpg', 'Desert.jpg', 'Tulips.jpg'];
+		$.each(backgrounds, function(index, value) {
+			(index == 0) ?
+			$('<img class="background active" src="asset/background/' + value + '">').appendTo('.cycler') :
+			$('<img class="background" src="asset/background/' + value + '">').appendTo('.cycler');
+		});
+		
+		function GetRandomImg(active_indx) {
+			random_indx = Math.floor(Math.random() * $('.background').length);
+			return (active_indx == random_indx) ? GetRandomImg(active_indx) : random_indx;
+		}
+		
+		function CycleImages() {
+			var active = $('.cycler .active');
+			var rand = (backgrounds.length > 1) ? GetRandomImg($('.cycler .active').index()) : $('.cycler .active').index();
+			var next = $('.background').eq(rand);
+			if (backgrounds.length > 1) {
+				next.css('z-index', 2) /* moves next image up the pile */
+				active.fadeOut(2000, function() {
+					active.css('z-index', 1).show().removeClass('active');
+					next.css('z-index', 3).addClass('active');
+				});
+			}
 		}
 		
 		$(document).ready(function() {
-			setInterval("cycleImages()", 7000);
+			setInterval('CycleImages()', 7000);
 		})
 	</script>
 </body>
