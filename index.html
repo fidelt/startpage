@@ -52,7 +52,7 @@
 		
 		function CycleImages() {
 			var active = $('.cycler .active');
-			var rand = ($('.background').length > 1) ? GetRandomImg($('.cycler .active').index()) : $('.cycler .active').index();
+			var rand = ($('.background').length > 1) ? GetRandomImg(active.index()) : active.index();
 			var next = $('.background').eq(rand);
 			if ($('.background').length > 1) {
 				next.css('z-index', 2) /* moves next image up the pile */
