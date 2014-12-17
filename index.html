@@ -42,12 +42,8 @@
 	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script>
+		// PUT YOUR IMAGES HERE
 		var backgrounds = ['Chrysanthemum.jpg', 'Desert.jpg', 'Tulips.jpg'];
-		$.each(backgrounds, function(index, value) {
-			(index == 0) ?
-			$('<img class="background active" src="asset/background/' + value + '">').appendTo('.cycler') :
-			$('<img class="background" src="asset/background/' + value + '">').appendTo('.cycler');
-		});
 		
 		function GetRandomImg(active_indx) {
 			random_indx = Math.floor(Math.random() * $('.background').length);
@@ -56,9 +52,9 @@
 		
 		function CycleImages() {
 			var active = $('.cycler .active');
-			var rand = (backgrounds.length > 1) ? GetRandomImg($('.cycler .active').index()) : $('.cycler .active').index();
+			var rand = ($('.background').length > 1) ? GetRandomImg($('.cycler .active').index()) : $('.cycler .active').index();
 			var next = $('.background').eq(rand);
-			if (backgrounds.length > 1) {
+			if ($('.background').length > 1) {
 				next.css('z-index', 2) /* moves next image up the pile */
 				active.fadeOut(2000, function() {
 					active.css('z-index', 1).show().removeClass('active');
@@ -68,6 +64,13 @@
 		}
 		
 		$(document).ready(function() {
+			while (backgrounds.length != 0) {
+				var random_img = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+				backgrounds.splice($.inArray(random_img, backgrounds),1);
+				($('.background').length == 0) ?
+						$('<img class="background active" src="asset/background/' + random_img + '">').appendTo('.cycler') :
+						$('<img class="background" src="asset/background/' + random_img + '">').appendTo('.cycler');
+			}
 			setInterval('CycleImages()', 7000);
 		})
 	</script>
