@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Startpage</title>
-	<link rel="stylesheet" type="text/css" href="asset/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="asset/css/style.css">
 </head>
 <body>
@@ -40,13 +40,17 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="asset/js/jquery-2.1.3.min.js"></script>
-	<script type="text/javascript" src="asset/js/bootstrap.js"></script>
+	<script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
 	<script>
-		// PUT YOUR IMAGES HERE
-		var backgrounds = ['Chrysanthemum.jpg', 'Desert.jpg', 'Tulips.jpg'];
+		/* LIST YOUR IMAGES HERE */
+		var backgrounds = [
+				'Chrysanthemum.jpg',
+				'Desert.jpg',
+				'Tulips.jpg',
+				];
 		
 		function GetRandomImg(active_indx) {
-			random_indx = Math.floor(Math.random() * $('.background').length);
+			var random_indx = Math.floor(Math.random() * $('.background').length);
 			return (active_indx == random_indx) ? GetRandomImg(active_indx) : random_indx;
 		}
 		
@@ -55,8 +59,9 @@
 			var rand = ($('.background').length > 1) ? GetRandomImg(active.index()) : active.index();
 			var next = $('.background').eq(rand);
 			if ($('.background').length > 1) {
-				next.css('z-index', 2) /* moves next image up the pile */
+				next.css('z-index', 2)
 				active.fadeOut(2000, function() {
+					/* 2 Seconds length of Fade-Out */
 					active.css('z-index', 1).show().removeClass('active');
 					next.css('z-index', 3).addClass('active');
 				});
@@ -72,6 +77,7 @@
 						$('<img class="background" src="asset/background/' + random_img + '">').appendTo('.cycler');
 			}
 			setInterval('CycleImages()', 7000);
+			/* 7 Seconds length of BG Display */
 		})
 	</script>
 </body>
