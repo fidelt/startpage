@@ -47,4 +47,5 @@ Check it out [here](https://cdn.rawgit.com/fidelt/startpage/master/index.html).
 | Bing          | `https://www.bing.com/search?`     | `Search Bing`   |
 | Google        | `https://www.google.com/search?`   | `Search Google` |
 | Yahoo!        | `https://search.yahoo.com/search?` | `Search Yahoo!` |
+
 - Save the changes that you have made.
